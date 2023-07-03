@@ -42,7 +42,7 @@ class _NewContactState extends State<NewContact> {
           TextButton(
               onPressed: () {
                 final contact = Contact(name: _controller.text);
-                ContactBook().add(contact: contact);
+                ContactBook().add(item: contact);
                 Navigator.of(context).pop();
               },
               child: const Text("Add Contact"))

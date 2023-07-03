@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:statemanagement/screens/newcontact_screen.dart';
+import 'package:statemanagement/screens/additem_screen.dart';
 
 import 'screens/homepage_screen.dart';
 
@@ -15,14 +15,14 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
+      title: 'TODO',
       theme: ThemeData(
         useMaterial3: true,
         primarySwatch: Colors.blue,
       ),
       home: const Homepage(),
       routes: {
-        '/new-contact': (context) => const NewContact(),
+        '/new-items': (context) => const NewContact(),
       },
     );
   }

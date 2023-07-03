@@ -15,16 +15,16 @@ class ContactBook extends ValueNotifier<List<Contact>> {
   factory ContactBook() => _share;
 
   int get length => value.length;
-  void add({required Contact contact}) {
-    final contacts = value;
-    contacts.add(contact);
+  void add({required Contact item}) {
+    final items = value;
+    items.add(item);
     notifyListeners();
   }
 
-  void remove({required Contact contact}) {
-    final contacts = value;
-    if (contacts.contains(contact)) {
-      contacts.remove(contact);
+  void remove({required Contact item}) {
+    final items = value;
+    if (items.contains(item)) {
+      items.remove(item);
       notifyListeners();
     }
   }

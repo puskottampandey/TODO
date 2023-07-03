@@ -34,34 +34,50 @@ class _HomepageState extends State<Homepage> {
         padding: const EdgeInsets.all(8.0),
         child: ValueListenableBuilder(
             valueListenable: ContactBook(),
-            builder: (contact, value, child) {
-              final contacts = value;
-              return ListView.builder(
-                itemCount: contacts.length,
-                itemBuilder: (context, index) {
-                  final contact = contacts[index];
-                  return Dismissible(
-                    onDismissed: (direction) {
-                      ContactBook().remove(contact: contact);
-                    },
-                    key: ValueKey(contact.id),
-                    child: Card(
-                      elevation: 6.0,
-                      child: ListTile(
-                        title: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Text(contact.name),
-                        ),
+            builder: (item, value, child) {
+              final items = value;
+              return items.isEmpty
+                  ? const Center(
+                      child: Text(
+                        "Add Item",
+                        style: TextStyle(
+                            fontSize: 25, fontWeight: FontWeight.bold),
                       ),
-                    ),
-                  );
-                },
-              );
+                    )
+                  : ListView.builder(
+                      itemCount: items.length,
+                      itemBuilder: (context, index) {
+                        final contact = items[index];
+                        return Dismissible(
+                          onDismissed: (direction) {
+                            ContactBook().remove(item: contact);
+                          },
+                          key: ValueKey(contact.id),
+                          child: Card(
+                            elevation: 6.0,
+                            child: ListTile(
+                              subtitle: Text(
+                                DateTime.now().toString(),
+                                style: const TextStyle(
+                                    fontWeight: FontWeight.bold),
+                              ),
+                              title: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Text(
+                                  contact.name,
+                                  style: const TextStyle(fontSize: 20),
+                                ),
+                              ),
+                            ),
+                          ),
+                        );
+                      },
+                    );
             }),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
-          await Navigator.of(context).pushNamed('/new-contact');
+          await Navigator.of(context).pushNamed('/new-items');
         },
         child: const Icon(Icons.add),
       ),
