@@ -17,9 +17,12 @@ class _HomepageState extends State<Homepage> {
         flexibleSpace: Container(
             decoration: const BoxDecoration(
                 gradient: LinearGradient(
-          colors: [Colors.blue, Colors.purple],
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
+          colors: [
+            Colors.blue,
+            Colors.purple,
+          ],
+          begin: Alignment.centerLeft,
+          end: Alignment.centerRight,
         ))),
         title: const Center(
           child: Text(
@@ -38,7 +41,9 @@ class _HomepageState extends State<Homepage> {
         },
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () async {
+          await Navigator.of(context).pushNamed('/new-contact');
+        },
         child: const Icon(Icons.add),
       ),
     );

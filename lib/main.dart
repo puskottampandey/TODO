@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:statemanagement/screens/newcontact_screen.dart';
 
 import 'screens/homepage_screen.dart';
 
@@ -20,6 +21,9 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       home: const Homepage(),
+      routes: {
+        '/new-contact': (context) => const NewContact(),
+      },
     );
   }
 }
