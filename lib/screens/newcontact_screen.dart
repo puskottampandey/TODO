@@ -45,7 +45,7 @@ class _NewContactState extends State<NewContact> {
                 ContactBook().add(contact: contact);
                 Navigator.of(context).pop();
               },
-              child: const Text("Add"))
+              child: const Text("Add Contact"))
         ],
       ),
     );

@@ -1,26 +1,35 @@
+import 'package:flutter/material.dart';
+import 'package:uuid/uuid.dart';
+
 class Contact {
+  final String id;
   final String name;
-  const Contact({
+  Contact({
     required this.name,
-  });
+  }) : id = const Uuid().v4();
 }
 
-class ContactBook {
-  ContactBook._sharedinstance();
+class ContactBook extends ValueNotifier<List<Contact>> {
+  ContactBook._sharedinstance() : super([]);
   static final ContactBook _share = ContactBook._sharedinstance();
   factory ContactBook() => _share;
 
-  final List<Contact> _contacts = [];
-  int get length => _contacts.length;
+  int get length => value.length;
   void add({required Contact contact}) {
-    _contacts.add(contact);
+    final contacts = value;
+    contacts.add(contact);
+    notifyListeners();
   }
 
   void remove({required Contact contact}) {
-    _contacts.remove(contact);
+    final contacts = value;
+    if (contacts.contains(contact)) {
+      contacts.remove(contact);
+      notifyListeners();
+    }
   }
 
   Contact? contact({required int atindex}) {
-    return _contacts.length > atindex ? _contacts[atindex] : null;
+    return value.length > atindex ? value[atindex] : null;
   }
 }

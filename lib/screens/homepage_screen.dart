@@ -11,7 +11,6 @@ class Homepage extends StatefulWidget {
 class _HomepageState extends State<Homepage> {
   @override
   Widget build(BuildContext context) {
-    final contactBook = ContactBook();
     return Scaffold(
       appBar: AppBar(
         flexibleSpace: Container(
@@ -31,14 +30,34 @@ class _HomepageState extends State<Homepage> {
           ),
         ),
       ),
-      body: ListView.builder(
-        itemCount: contactBook.length,
-        itemBuilder: (BuildContext context, int index) {
-          final contact = contactBook.contact(atindex: index)!;
-          return ListTile(
-            title: Text(contact.name),
-          );
-        },
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: ValueListenableBuilder(
+            valueListenable: ContactBook(),
+            builder: (contact, value, child) {
+              final contacts = value;
+              return ListView.builder(
+                itemCount: contacts.length,
+                itemBuilder: (context, index) {
+                  final contact = contacts[index];
+                  return Dismissible(
+                    onDismissed: (direction) {
+                      ContactBook().remove(contact: contact);
+                    },
+                    key: ValueKey(contact.id),
+                    child: Card(
+                      elevation: 6.0,
+                      child: ListTile(
+                        title: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(contact.name),
+                        ),
+                      ),
+                    ),
+                  );
+                },
+              );
+            }),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
